@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+LABEL maintainer="Madhavi Allolimath"
+
 workdir /
 
 RUN apt-get update -y \
