@@ -12,9 +12,16 @@ This project is designed to provide the best solution for problem statement: Man
 	
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* Kubernetes: 1.17
+* Argo: v2.2.1
+* Java: 1.8
+* Bash: 4.1
+* Linux: debian, alpine
+* Docker: 19.03.6-ce, build 369ce74
+* containerd: 1.3.4 
+* python: 3.6
+* openebs: 2.0.0
+* tomcat: 8
 	
 ## Setup
 To run this project, install it locally using npm:
