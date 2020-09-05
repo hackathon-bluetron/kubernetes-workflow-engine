@@ -76,9 +76,8 @@ spec:
     spec:
       volumes: 
       - name: hostvolume
-        hostPath:
-          path: /home/bluetron
-          type: DirectoryOrCreate
+        persistentVolumeClaim:
+          claimName: local-hostpath-pvc
       containers:
       - image: bluetron/hackathon:financialprocessor
         name: financialprocessor
