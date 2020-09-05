@@ -24,6 +24,8 @@ Project is created with:
 * tomcat: 8
 	
 ## Setup
+
+* [openebs setup](#openebs-setup)
 To run this project, install it locally using npm:
 
 ```
@@ -32,5 +34,5 @@ $ npm install
 $ npm start
 ```
 
-### openebs setup
+### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
