@@ -90,6 +90,8 @@ Create a namespace called "bluetron"
 $ kubectl create ns bluetron
 
 ```
+### frontend-setup
+
 deploy the frontend for the bluetron dataprocessor engine.
 
 ```
