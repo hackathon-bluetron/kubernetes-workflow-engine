@@ -98,3 +98,21 @@ spec:
               key: ca.crt
               name: $(nameOfSecret)
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bluetron-financial-processor
+  name: bluetron-financial-processor
+  namespace: bluetron
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: bluetron-financial-processor
+  sessionAffinity: None
+  type: ClusterIP
