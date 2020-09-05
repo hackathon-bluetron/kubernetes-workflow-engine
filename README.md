@@ -126,6 +126,5 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 
 ```
 
-```
 
 ### financial-finalizer-setup
