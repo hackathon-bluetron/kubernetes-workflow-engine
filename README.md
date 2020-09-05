@@ -26,7 +26,6 @@ Project is created with:
 ## Setup
 
 * [openebs setup](#openebs-setup)
-To run this project, install it locally using npm:
 
 ```
 $ cd ../lorem
