@@ -30,6 +30,7 @@ Project is created with:
 * [kubernetes prerequisites setup](#kubernetes-prerequisites-setup)
 * [frontend setup](#frontend-setup)
 * [financial processor setup](#financial-processor-setup)
+* [financial finalizer setup](#financial-finalizer-setup)
 
 
 ### openebs-setup
@@ -126,3 +127,5 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 ```
 
 ```
+
+### financial-finalizer-setup
