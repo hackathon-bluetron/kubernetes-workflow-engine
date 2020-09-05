@@ -39,12 +39,97 @@ $ npm start
 
 ### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
-### openebs-setup
-bla bla bla
+
+The user need to run the openebs storage provisioner in k8s cluster. openebs is basically going to be the storage class provisioner for persistent volume (pv and persistent volume claim (pvc) requirement. using openebs storage class we are going to create required volumes for all running containers. and the storage is going to be shared across all containers (sequntial & parallel).
+
+N.B; As the Local PV storage classes use waitForFirstConsumer, do not use nodeName in the Pod spec to specify node affinity. If nodeName is used in the Pod spec, then PVC will remain in pending state.
+
+```
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/openebs/openebs-install.yaml
+
+```
+
+the user can verify the provisioned storage class by running the below command
+
+```
+
+$ kubectl get storageclasses | grep "openebs-hostpath"
+
+```
+Now the user need to create a persistent volume claim (pvc) which will be consumed by all running containers
+
+```
+
+kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/openebs/local-hostpath-pvc.yaml
+
+```
+
+Once the pvc gets created, you may notice the pvc is in pending state. This is just a warnng stating that the pvc will not be bound until the consumer (any running pod) is not consuming this storage.
+Once the consumer aka POD gets into running state the pvc will be automatically bound to the dynamic pv managed by openebs storageclass.
+
 ### workflow-engine-setup
-bla bla bla
+
+Workflow engine is the backend engine in the complete solution, which takes care of dynamically created containers to execute on event basis. And it controls the sequential and parallel execution of jobs being executed as a petal of the workflow.
+
+To create the workflow-engine run the below command.
+
+```
+kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/workflowengine/bluetron-workflow-engine.yaml
+
+```
+once the resources get created you can list them by using the below command:
+
+```
+kubectl get all -n workflow-engine
+
+```
+
+The users can now access the workflow ui using the exposed NodePort "32206" with kubernetes cluster's public i.p
+
+
+http://kubernetes.cluster.public.ip:32206
+
 ### kubernetes-prerequisites-setup
-bla bla bla
+
+Create a namespace called "bluetron"
+
+```
+kubectl create ns bluetron
+
+```
+deploy the frontend for the bluetron dataprocessor engine.
+
+```
+
+
+```
+
+Deploy the financial processor using the below steps:
+
+findout the secret name by using below command:
+```
+$ kubectl get secret -n bluetron|grep "bluetron-admin"
+
+```
+replace the value "$(nameOfSecret)" in the manifest file "https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/financialprocessor/bluetron-financial-processor.yaml" with the output in previous command.
+
+
+Apply the modified version of manifest i.e; bluetron-financial-processor.yaml using the below command:
+```
+$ kubectl apply -f bluetron-financial-processor.yaml
+
+```
+Users can verify the deployment using the below command:
+
+```
+$ kubectl get all -n bluetron | grep "bluetron-financial-processor"
+
+```
+
+```
+
+
+
 ### frontend-setup
 bla bla bla
 ### financial-processor-setup
