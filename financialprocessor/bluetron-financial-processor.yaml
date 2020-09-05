@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bluetron-financial-processor
+  name: bluetron-financial-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluetron-financial-processor
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bluetron-financial-processor
+    spec:
+      volumes: 
+      - name: hostvolume
+        hostPath:
+          path: /home/bluetron
+          type: DirectoryOrCreate
+      containers:
+      - image: bluetron/hackathon:financialprocessor
+        name: financialprocessor
+        volumeMounts:
+        - name: hostvolume
+          mountPath: /mnt/data
+        resources: {}
+        env:
+        - name: BLUETRON_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: bluetron-admin-token-xc28r
+        - name: BLUETRON_CERT
+          valueFrom:
+            secretKeyRef:
+              key: ca.crt
+              name: bluetron-admin-token-xc28r
+status: {}
