@@ -26,6 +26,10 @@ Project is created with:
 ## Setup
 
 * [openebs setup](#openebs-setup)
+* [workflow engine setup](#workflow-engine-setup)
+* [kubernetes prerequisites setup](#kubernetes-prerequisites-setup)
+* [frontend setup](#frontend-setup)
+* [financial processor setup](#financial-processor-setup)
 
 ```
 $ cd ../lorem
@@ -35,3 +39,13 @@ $ npm start
 
 ### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
+### openebs-setup
+bla bla bla
+### workflow-engine-setup
+bla bla bla
+### kubernetes-prerequisites-setup
+bla bla bla
+### frontend-setup
+bla bla bla
+### financial-processor-setup
+bla bla bla
