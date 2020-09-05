@@ -31,3 +31,6 @@ $ cd ../lorem
 $ npm install
 $ npm start
 ```
+
+### openebs setup
+To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
