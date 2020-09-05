@@ -213,6 +213,7 @@ spec:
   ports:
   - port: 80
     targetPort: 8001
+    nodePort: 32206
   type: NodePort
   selector:
     app: argo-ui
