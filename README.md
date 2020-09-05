@@ -31,11 +31,6 @@ Project is created with:
 * [frontend setup](#frontend-setup)
 * [financial processor setup](#financial-processor-setup)
 
-```
-$ cd ../lorem
-$ npm install
-$ npm start
-```
 
 ### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
@@ -60,7 +55,7 @@ Now the user need to create a persistent volume claim (pvc) which will be consum
 
 ```
 
-kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/openebs/local-hostpath-pvc.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/openebs/local-hostpath-pvc.yaml
 
 ```
 
@@ -74,27 +69,25 @@ Workflow engine is the backend engine in the complete solution, which takes care
 To create the workflow-engine run the below command.
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/workflowengine/bluetron-workflow-engine.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/workflowengine/bluetron-workflow-engine.yaml
 
 ```
 once the resources get created you can list them by using the below command:
 
 ```
-kubectl get all -n workflow-engine
+$ kubectl get all -n workflow-engine
 
 ```
 
-The users can now access the workflow ui using the exposed NodePort "32206" with kubernetes cluster's public i.p
+The users can now access the workflow ui using the exposed NodePort "32206" with kubernetes cluster's public i.p "http://kubernetes.cluster.public.ip:32206"
 
-
-http://kubernetes.cluster.public.ip:32206
 
 ### kubernetes-prerequisites-setup
 
 Create a namespace called "bluetron"
 
 ```
-kubectl create ns bluetron
+$ kubectl create ns bluetron
 
 ```
 deploy the frontend for the bluetron dataprocessor engine.
@@ -104,17 +97,21 @@ deploy the frontend for the bluetron dataprocessor engine.
 
 ```
 
+
+### financial-processor-setup
+
 Deploy the financial processor using the below steps:
 
 findout the secret name by using below command:
+
 ```
 $ kubectl get secret -n bluetron|grep "bluetron-admin"
 
 ```
 replace the value "$(nameOfSecret)" in the manifest file "https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/financialprocessor/bluetron-financial-processor.yaml" with the output in previous command.
 
-
 Apply the modified version of manifest i.e; bluetron-financial-processor.yaml using the below command:
+
 ```
 $ kubectl apply -f bluetron-financial-processor.yaml
 
@@ -127,10 +124,3 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 ```
 
 ```
-
-
-
-### frontend-setup
-bla bla bla
-### financial-processor-setup
-bla bla bla
