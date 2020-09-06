@@ -128,3 +128,8 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 
 
 ### financial-finalizer-setup
+
+Deploy the financial processor using the below steps:
+
+```
+```
