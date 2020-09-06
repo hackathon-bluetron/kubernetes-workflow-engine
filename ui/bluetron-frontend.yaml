@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bluetron-frontend
+  name: bluetron-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluetron-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bluetron-frontend
+    spec:
+      volumes: 
+      - name: hostvolume
+        persistentVolumeClaim:
+          claimName: local-hostpath-pvc
+      containers:
+      - image: bluetron/hackathon:frontend
+        name: frontend
+        volumeMounts:
+        - name: hostvolume
+          mountPath: /mnt/data
+        resources: {}
+        env:
+        - name: BLUETRON_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: bluetron-admin-token-xc28r
+        - name: BLUETRON_CERT
+          valueFrom:
+            secretKeyRef:
+              key: ca.crt
+              name: bluetron-admin-token-xc28r
+status: {}
+---
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bluetron-frontend
+  name: bluetron-frontend
+  namespace: bluetron
+spec:
+  ports:
+  - nodePort: 30285
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: bluetron-frontend
+  sessionAffinity: None
+  type: NodePort
