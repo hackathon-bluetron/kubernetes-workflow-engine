@@ -96,7 +96,7 @@ $ kubectl create ns bluetron
 deploy the frontend for the bluetron dataprocessor engine.
 
 ```
-
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/ui/bluetron-frontend.yaml
 
 ```
 
