@@ -31,7 +31,7 @@ Project is created with:
 * [frontend setup](#frontend-setup)
 * [financial processor setup](#financial-processor-setup)
 * [financial finalizer setup](#financial-finalizer-setup)
-
+* [console setup](#kubernetes-console-setup)
 
 ### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
@@ -132,4 +132,13 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 Deploy the financial processor using the below steps:
 
 ```
+```
+
+### kubernetes-console-setup
+
+Rubn the below command to setup portainer kubernetes console where you can manage to give access to different users using internal auth to access resourcepool objects.
+
+```
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/console/console-install.yaml
+
 ```
