@@ -132,6 +132,8 @@ $ kubectl get all -n bluetron | grep "bluetron-financial-processor"
 Deploy the financial processor using the below steps:
 
 ```
+$ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/financialfinalizer/bluetron-financial-finalizer.yaml
+
 ```
 
 ### kubernetes-console-setup
