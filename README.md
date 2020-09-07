@@ -112,15 +112,17 @@ Project is created with:
 	
 ## Setup
 
-* [openebs setup](#openebs-setup)
-* [workflow engine setup](#workflow-engine-setup)
 * [kubernetes prerequisites setup](#kubernetes-prerequisites-setup)
+* [workflow engine setup](#workflow-engine-setup)
 * [frontend setup](#frontend-setup)
 * [financial processor setup](#financial-processor-setup)
 * [financial finalizer setup](#financial-finalizer-setup)
 * [console setup](#kubernetes-console-setup)
 
-### openebs-setup
+
+#### kubernetes-prerequisites-setup
+
+#### openebs-setup
 To setup the openebs as storage class provisioner and automating volume provisioning follow the instructions below.
 
 The user need to run the openebs storage provisioner in k8s cluster. openebs is basically going to be the storage class provisioner for persistent volume (pv and persistent volume claim (pvc) requirement. using openebs storage class we are going to create required volumes for all running containers. and the storage is going to be shared across all containers (sequntial & parallel).
@@ -144,6 +146,16 @@ Now the user need to create a persistent volume claim (pvc) which will be consum
 ```
 
 $ kubectl apply -f https://raw.githubusercontent.com/hackathon-bluetron/kubernetes-workflow-engine/master/openebs/local-hostpath-pvc.yaml
+
+```
+
+
+#### namespace-setup
+
+Create a namespace called "bluetron"
+
+```
+$ kubectl create ns bluetron
 
 ```
 
