@@ -22,7 +22,7 @@ spec:
         persistentVolumeClaim:
           claimName: local-hostpath-pvc
       containers:
-      - image: bluetron/hackathon:frontend
+      - image: bluetron/hackathon:frontendui
         name: frontend
         volumeMounts:
         - name: hostvolume
