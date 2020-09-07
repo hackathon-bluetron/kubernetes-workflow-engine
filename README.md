@@ -30,13 +30,13 @@ The backend springboot application code is available at "https://github.com/hack
 
 ![Alt text](images/frontend_response.JPG?raw=true "Title")
 
-The Acyclic Engine  manages the load and the intrinsic dependencies between the process and thereby the containers.
+4. The Acyclic Engine  manages the load and the intrinsic dependencies between the process and thereby the containers.
 The Parallelism counter starts assigning tasks to the Steps Engine which would eventually create containers to be created dynamically for the workload and should accomplish the job in parallel.
 Once these parallel running containers who executed individual piece of task of processing xls to csv  gets completed. The merger container comes into place.
 The merge container basically merges all the csv to a combined csv file which holds all the processed raw data of input xls file.
 The user will be acknowledged with the absolute path of the processed csv files available in the container backed storage.
 
-All these processes automatically gets executed when the user uploads the xls file to process. and the realtime data processing through the Acyclic Engine, Parallelism counter, Steps Engine is controlled by the coreprocessor unit. The real ime data processing is accessible at "http://169.51.204.19:32206/workflows/". This is the workflow ui running as a pod in kubernetes cluster.
+5. All these processes automatically gets executed when the user uploads the xls file to process. and the realtime data processing through the Acyclic Engine, Parallelism counter, Steps Engine is controlled by the coreprocessor unit. The real ime data processing is accessible at "http://169.51.204.19:32206/workflows/". This is the workflow ui running as a pod in kubernetes cluster.
 
 The workflow UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/workflowengine"
 
@@ -48,6 +48,49 @@ Workflow UI
 Individual workflow process steps.
 
 ![Alt text](images/workflow_process.JPG?raw=true "Title")
+
+
+6. We have installed another UI running as pod where we do manage all the kubernetes resources. this UI is available at "http://169.51.204.19:30777/"
+
+the operation manual of this UI is explained below
+
+
+```
+
+a. login the url here "http://169.51.204.19:30777/"
+
+b. click on kubernetes cluster "local cluster"
+
+c. click on Resource pool & select "bluetron" Resource pool
+
+d. Click on "bluetron-financial-finalizer" or "bluetron-financial-processor" Application
+
+e. Scroll down to find out the running pods.
+
+f. Click on "Console" in bottom right corner.
+
+g. In console command type "/bin/bash" and connect.
+
+h. This is a virtual console to the running pods in the bluetron namespace aka Resource pool.
+
+I. The pod is already attached with Shared PVC at mount point /mnt/data.
+
+J. The input files brfore process is stored in this shared folder at "/mnt/data/input" & after processing the processed csv files are available "/mnt/data/output/<filename>" folder
+
+K. The users can verify the processed csv files at the output folder
+
+Example.
+
+Suppose an user uploads a file named as "sample.xlsx" with 10 sheets, then the input file will be stored at "/mnt/data/input" folder and processed csv files will be available at "/mnt/data/output/sample" folder with below contents inside
+
+
+Sector1.csv       Sector3.csv       Sector6.csv       Sector9.csv
+Sector10.csv      Sector4.csv       Sector7.csv       combined_csv.csv
+Sector2.csv       Sector5.csv       Sector8.csv
+
+```
+![Alt text](images/console.JPG?raw=true "Title")
+
 
 
 
