@@ -12,12 +12,24 @@ This project is designed to provide the best solution for problem statement: Man
 	
 ## Solution
 
-1. The solution have a Front End UI which is available at "" which would be an application running on the Kubernetes pod. The user would provide an input in the form of an excel workbook which may contain numerous sheets. Once the excel workbook with data is added, the Front-end application calls a Java spring boot Microservice and sends the input as excel file.
+1. The solution have a Front End UI which is available at "http://169.51.204.19:30285/BluTronFinantialProcesser/",  which is an application running on the Kubernetes pod. The user provide an input in the form of an excel workbook which may contain numerous sheets. Once the excel workbook with data is added, the Front-end application calls a Java spring boot backend Microservice and sends the input as excel file. The backend microservice is exposed with an API, so when front-end microservice calls the backend unit over API an automation script automatically gets invoked in the calls the entire workflow-engine and coreprocessor 
+
+The respective frontend containerization code (kubernetes deployment, service, frontend .war & Dockerfile is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/ui"
+
+The frontend web application code is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/SpringFileUpload"
 
 ![Alt text](images/frontend.JPG?raw=true "Title")
 
-The Microservice validates the input file and sends the total number of sheets present in the workbook as a response to the front-end application.
-The microservice then triggers the workflow engine with the input excel file as an argument to the automation script. The workflow engine counts the number of sheets and depending on that it calls the Kubernetes API to start the workload in Acyclic Engine.
+2. The Microservice validates the input file and sends the total number of sheets present in the workbook and the sheet validation info as a response to the front-end application.
+
+The respective backend microservice containerization code (kubernetes deployment, service, frontend .war & Dockerfile is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/financialprocessor"
+
+The backend springboot application code is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/SpringFileUpload"
+
+3. The microservice then triggers the workflow engine with the input excel file as an argument to the automation script. In the front-end ui we can see the validation status of excel file, depending on validation it calls the Kubernetes API through a shell script to start the workload in Acyclic Engine.
+
+![Alt text](images/frontend_response.JPG?raw=true "Title")
+
 The Acyclic Engine  manages the load and the intrinsic dependencies between the process and thereby the containers.
 The Parallelism counter starts assigning tasks to the Steps Engine which would eventually create containers to be created dynamically for the workload and should accomplish the job in parallel.
 Once these parallel running containers who executed individual piece of task of processing xls to csv  gets completed. The merger container comes into place.
