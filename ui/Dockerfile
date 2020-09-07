@@ -27,9 +27,7 @@ RUN rm -rf /tmp/* /var/cache/apk/*
 EXPOSE 8080
 
 COPY startup.sh /opt/startup.sh
-#COPY sample.war /opt/tomcat/webapps
-#COPY FinancialProcessorWebapp.war /opt/tomcat/webapps
-COPY spring.war /opt/tomcat/webapps
+COPY Spring.war /opt/tomcat/webapps
 ENTRYPOINT /opt/startup.sh
 
 WORKDIR $CATALINA_HOME
