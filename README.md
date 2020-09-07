@@ -203,14 +203,6 @@ $ kubectl get all -n workflow-engine
 The users can now access the workflow ui using the exposed NodePort "32206" with kubernetes cluster's public i.p "http://kubernetes.cluster.public.ip:32206"
 
 
-### kubernetes-prerequisites-setup
-
-Create a namespace called "bluetron"
-
-```
-$ kubectl create ns bluetron
-
-```
 ### frontend-setup
 
 deploy the frontend for the bluetron dataprocessor engine.
