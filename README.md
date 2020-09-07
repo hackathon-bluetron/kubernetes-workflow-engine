@@ -4,6 +4,7 @@
 
 ## Table of contents
 * [General info](#general-info)
+* [Solution](#Solution)
 * [Technologies](#technologies)
 * [Setup](#setup)
 
@@ -95,6 +96,26 @@ Sector2.csv       Sector5.csv       Sector8.csv
 
 The console  UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/console"
 
+
+The user can list and read the processed csv files in the output directory.
+
+
+![Alt text](images/list_console.JPG?raw=true "Title")
+
+
+If user wants to download the processed csv files then we have exposed another API with financialfinalizer springboot service running as a pod. 
+
+The workbook name and sheet name the user needs to send as request parameters to this API to download the processed CSV files.
+
+
+http://169.51.204.19:31057/getcsvfile?csvfilename=<filename>/<sheetname.csv>
+
+Suppose an user uploads a file named as "sample.xlsx" with 10 sheets, and first sheet name is Sector1. Then the user need to call the below API to download the processed CSV file of sheet1
+
+http://169.51.204.19:31057/getcsvfile?csvfilename=sample/Sector1.csv
+
+
+![Alt text](images/download_api.JPG?raw=true "Title")
 
 ## Technologies
 Project is created with:
