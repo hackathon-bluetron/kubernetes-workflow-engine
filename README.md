@@ -5,11 +5,42 @@
 ## Table of contents
 * [General info](#general-info)
 * [Solution](#Solution)
+* [Approach](#Approach)
 * [Technologies](#technologies)
 * [Setup](#setup)
 
 ## General info
 This project is designed to provide the best solution for problem statement: Many complicated systems (like Media file processing, Data processing) need their data or process to be in a specific state, or tasks to be running at specific times. While we can use tools like Cron to schedule tasks, the implicit dependencies between different tasks may quickly become unmanageable. By explicitly defining how our tasks depend on each other in the same place you define when they should run, it becomes much easier to work out where something went wrong. Using native orchestration procedures, we’ll also spend less time setting up new tasks, fitting them into our existing workflows, and spinning up hardware to run them on requirement basis in anauto-scaling topology. Legacy job schedulers with Kubernetes job and wondering how to write sequential jobs as a Kubernetes job.
+
+## Approach
+
+* For this demonstration we are setting up the cluster in **IBM Kubernetes Cluster** with a Lite account and free IKS cluster. The cluster is having 2 cores in total 4 Gi RAM. With this minimal resources we tried to process a engine which take any workbook in xslx format as input and  do process all the sheets of workbook and convert each sheets data to csv and stores the data in a specific storage   *
+
+* So there may be a single sheet or "n" nos of sheets in a workbook, depending upon the number of sheets in the workbook we dynamically schedule containers to process each sheet independently and in parallel with other containers. and once all sheets data get processed there is another container dynamically gets created as an event trigger in the workflow and concatanates all processedd csvs into a combined csv. *
+
+
+The resource capacity and allocatable resources available in IKS cluster is given below
+
+
+```
+************************************
+Capacity:                          *
+  cpu:                2            *
+  ephemeral-storage:  101330012Ki  *
+  hugepages-1Gi:      0            *
+  hugepages-2Mi:      0            *
+  memory:             4041560Ki    *
+Allocatable:                       *
+  cpu:                1920m        *
+  ephemeral-storage:  98573835597  *
+  hugepages-1Gi:      0            *
+  hugepages-2Mi:      0            *
+  memory:             2929496Ki    *
+************************************
+
+```
+In this workflow process we are not capturing the resources permanently nor running the containers permanently, the containers gets triggered on event basis. and resource utilization by all these dynamic containers is very interim.
+
 	
 ## Solution
 
@@ -94,7 +125,7 @@ Sector2.csv       Sector5.csv       Sector8.csv
 
 
 
-The console  UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/console"
+7. The console  UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/console"
 
 
 The user can list and read the processed csv files in the output directory.
@@ -103,7 +134,7 @@ The user can list and read the processed csv files in the output directory.
 ![Alt text](images/list_console.JPG?raw=true "Title")
 
 
-If user wants to download the processed csv files then we have exposed another API with financialfinalizer springboot service running as a pod. 
+8. If user wants to download the processed csv files then we have exposed another API with financialfinalizer springboot service running as a pod. 
 
 The workbook name and sheet name the user needs to send as request parameters to this API to download the processed CSV files.
 
