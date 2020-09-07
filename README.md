@@ -93,11 +93,12 @@ Sector2.csv       Sector5.csv       Sector8.csv
 
 
 
-The console  UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/workflowengine"
+The console  UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/console"
 
 
 ## Technologies
 Project is created with:
+* IBM Cloud: IKS
 * Kubernetes: 1.17
 * Argo: v2.2.1
 * Java: 1.8
