@@ -10,6 +10,21 @@
 ## General info
 This project is designed to provide the best solution for problem statement: Many complicated systems (like Media file processing, Data processing) need their data or process to be in a specific state, or tasks to be running at specific times. While we can use tools like Cron to schedule tasks, the implicit dependencies between different tasks may quickly become unmanageable. By explicitly defining how our tasks depend on each other in the same place you define when they should run, it becomes much easier to work out where something went wrong. Using native orchestration procedures, we’ll also spend less time setting up new tasks, fitting them into our existing workflows, and spinning up hardware to run them on requirement basis in anauto-scaling topology. Legacy job schedulers with Kubernetes job and wondering how to write sequential jobs as a Kubernetes job.
 	
+## Solution
+
+1. The solution have a Front End UI which is available at "" which would be an application running on the Kubernetes pod. The user would provide an input in the form of an excel workbook which may contain numerous sheets. Once the excel workbook with data is added, the Front-end application calls a Java spring boot Microservice and sends the input as excel file.
+
+![Alt text](images/frontend.JPG?raw=true "Title")
+
+The Microservice validates the input file and sends the total number of sheets present in the workbook as a response to the front-end application.
+The microservice then triggers the workflow engine with the input excel file as an argument to the automation script. The workflow engine counts the number of sheets and depending on that it calls the Kubernetes API to start the workload in Acyclic Engine.
+The Acyclic Engine  manages the load and the intrinsic dependencies between the process and thereby the containers.
+The Parallelism counter starts assigning tasks to the Steps Engine which would eventually create containers to be created dynamically for the workload and should accomplish the job in parallel.
+Once these parallel running containers who executed individual piece of task of processing xls to csv  gets completed. The merger container comes into place.
+The merge container basically merges all the csv to a combined csv file which holds all the processed raw data of input xls file.
+The user will be acknowledged with the absolute path of the processed csv files available in the container backed storage.
+
+
 ## Technologies
 Project is created with:
 * Kubernetes: 1.17
