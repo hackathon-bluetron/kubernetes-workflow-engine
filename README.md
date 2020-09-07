@@ -22,7 +22,7 @@ The frontend web application code is available at "https://github.com/hackathon-
 
 2. The Microservice validates the input file and sends the total number of sheets present in the workbook and the sheet validation info as a response to the front-end application.
 
-The respective backend microservice containerization code (kubernetes deployment, service, frontend .war & Dockerfile is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/financialprocessor"
+The respective backend microservice containerization code (kubernetes deployment, service, microservice jwar & Dockerfile) are available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/financialprocessor"
 
 The backend springboot application code is available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/SpringFileUpload"
 
@@ -35,6 +35,20 @@ The Parallelism counter starts assigning tasks to the Steps Engine which would e
 Once these parallel running containers who executed individual piece of task of processing xls to csv  gets completed. The merger container comes into place.
 The merge container basically merges all the csv to a combined csv file which holds all the processed raw data of input xls file.
 The user will be acknowledged with the absolute path of the processed csv files available in the container backed storage.
+
+All these processes automatically gets executed when the user uploads the xls file to process. and the realtime data processing through the Acyclic Engine, Parallelism counter, Steps Engine is controlled by the coreprocessor unit. The real ime data processing is accessible at "http://169.51.204.19:32206/workflows/". This is the workflow ui running as a pod in kubernetes cluster.
+
+The workflow UI containerization code (kubernetes deployment, service, RBAC, Secret, Configmap etc) are  available at "https://github.com/hackathon-bluetron/kubernetes-workflow-engine/tree/master/workflowengine"
+
+Workflow UI
+
+![Alt text](images/workflow.JPG?raw=true "Title")
+
+
+Individual workflow process steps.
+
+![Alt text](images/workflow_process.JPG?raw=true "Title")
+
 
 
 ## Technologies
